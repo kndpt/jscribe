@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Apply smooth transitions when changing themes */
+.dark-theme,
+.dark-theme * {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+/* Editor toolbar animation */
+[data-role="editor-toolbar"] {
+  transition: opacity 0.2s ease-in-out;
+  opacity: 1 !important; /* Make toolbar visible by default */
+}
+
+/* Highlight hover zones */
+@media (min-width: 768px) {
+  [data-role="editor-toolbar"] {
+    /* Make toolbar initially visible on larger screens */
+    opacity: 1 !important;
+  }
+}
+
+/* Animation for editor toolbar appearance */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+[data-role="editor-toolbar"] {
+  animation: fadeIn 0.3s ease-out;
+}
