@@ -90,6 +90,33 @@ export function SnippetsProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  // Function to check if a snippet is empty (only contains whitespace)
+  const isSnippetEmpty = (snippet: Snippet): boolean => {
+    const trimmedContent = snippet.content.trim();
+    return trimmedContent === "";
+  };
+
+  // Modified setSelectedSnippetId to delete empty snippets when changing selection
+  const handleSelectedSnippetChange = (id: string | null) => {
+    // If we're selecting a different snippet
+    if (id !== selectedSnippetId) {
+      // Check if the current snippet is empty
+      const currentSnippet = snippets.find((snippet) => snippet.id === selectedSnippetId);
+
+      if (currentSnippet && isSnippetEmpty(currentSnippet)) {
+        // Delete the empty snippet first
+        const newSnippets = snippets.filter((snippet) => snippet.id !== currentSnippet.id);
+        setSnippets(newSnippets);
+
+        // Then set the new selected snippet
+        setSelectedSnippetId(id);
+      } else {
+        // Just set the new selected snippet without deleting anything
+        setSelectedSnippetId(id);
+      }
+    }
+  };
+
   const filteredSnippets = snippets.filter((snippet) => {
     if (!searchQuery) return true;
     const lowerQuery = searchQuery.toLowerCase();
@@ -108,7 +135,7 @@ export function SnippetsProvider({ children }: { children: ReactNode }) {
     createSnippet,
     updateSnippet,
     deleteSnippet,
-    setSelectedSnippetId,
+    setSelectedSnippetId: handleSelectedSnippetChange,
     searchQuery,
     setSearchQuery,
     filteredSnippets,

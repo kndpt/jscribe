@@ -95,7 +95,7 @@ const CodeEditor = () => {
         language={mapLanguage(selectedSnippet.language)}
         value={selectedSnippet.content}
         theme={theme === "light" ? "vs" : "vs-dark"}
-        onChange={(value) => value && updateSnippet({ ...selectedSnippet, content: value })}
+        onChange={(value) => updateSnippet({ ...selectedSnippet, content: value || "" })}
         onMount={handleEditorDidMount}
         loading={
           <div
