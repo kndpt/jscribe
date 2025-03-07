@@ -7,6 +7,7 @@ import EditorToolbar from "./components/EditorToolbar";
 import { SnippetsProvider } from "./contexts/SnippetsContext";
 import { ConsoleProvider } from "./contexts/ConsoleContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { ObjectInspectorProvider } from "./contexts/ObjectInspectorContext";
 import "./index.css";
 
 function AppContent() {
@@ -47,7 +48,9 @@ function App() {
     <ThemeProvider>
       <SnippetsProvider>
         <ConsoleProvider>
-          <AppContent />
+          <ObjectInspectorProvider>
+            <AppContent />
+          </ObjectInspectorProvider>
         </ConsoleProvider>
       </SnippetsProvider>
     </ThemeProvider>
