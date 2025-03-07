@@ -1,4 +1,4 @@
-import { Plus, Search, Trash2 } from "lucide-react";
+import { Plus, Search, Trash2, Code2 } from "lucide-react";
 import { useSnippets } from "../contexts/SnippetsContext";
 import { useTheme } from "../contexts/ThemeContext";
 import { formatDistanceToNow } from "../utils/date";
@@ -98,11 +98,28 @@ const Sidebar = () => {
                                   : "text-gray-500"
                               }`}
                   >
+                    <Code2 size={12} />
                     <span className="uppercase text-[10px]">
                       {snippet.language === "javascript" ? "JS" : "TS"}
                     </span>
                     <span>•</span>
                     <span>{formatDistanceToNow(new Date(snippet.updatedAt))}</span>
+                  </div>
+                  <div
+                    className={`text-xs mt-1 font-mono truncate
+                              ${
+                                selectedSnippetId === snippet.id
+                                  ? isDark
+                                    ? "text-blue-200"
+                                    : "text-blue-600"
+                                  : isDark
+                                  ? "text-gray-400"
+                                  : "text-gray-500"
+                              }`}
+                  >
+                    {snippet.content
+                      ? snippet.content.split("\n")[0].substring(0, 50)
+                      : "Code vide"}
                   </div>
                 </div>
 
